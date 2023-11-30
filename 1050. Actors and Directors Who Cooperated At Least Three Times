@@ -1,0 +1,10 @@
+import pandas as pd
+
+def actors_and_directors(actor_director: pd.DataFrame) -> pd.DataFrame:
+    return (
+        actor_director
+        .groupby(by=['actor_id', 'director_id'], as_index=False)
+        .agg({'timestamp': 'count'})#.agg({名稱:方法})
+        .query('timestamp >= 3')#.query(符合條件)
+        [['actor_id', 'director_id']]
+    )
