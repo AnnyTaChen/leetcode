@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        m = len(matrix)
+        rotated_matrix = [[0] * m for _ in range(m)]
+        for i in range(m):
+            for j in range(m):
+                rotated_matrix[i][j] = matrix[m - j - 1][i]
+
+        # 直接賦值給原始矩陣
+        for i in range(m):
+            for j in range(m):
+                matrix[i][j] = rotated_matrix[i][j]
+
+        return matrix
