@@ -1,0 +1,9 @@
+import pandas as pd
+
+def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame, examinations: pd.DataFrame) -> pd.DataFrame:
+    examinations = examinations.groupby(['student_id', 'subject_name']).agg(attended_exams=('subject_name', 'count')).reset_index()
+    std = students.merge(subjects, how='cross')
+    ex = examinations.merge(std, on=['student_id', 'subject_name'], how='right')
+    ex['attended_exams'] = ex['attended_exams'].fillna(0)
+    ex = ex.sort_values(by=['student_id','subject_name'])  # Corrected line
+    return ex[['student_id', 'student_name', 'subject_name', 'attended_exams']]
