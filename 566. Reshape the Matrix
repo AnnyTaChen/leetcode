@@ -1,0 +1,18 @@
+from typing import List
+
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        # Check if reshaping is possible
+        row = len(mat)
+        col = len(mat[0])
+        if row * col != r * c:
+            return mat  # Reshaping not possible, return the original matrix
+
+        # Reshape the matrix
+        matrix = []
+        for i in range(r):
+            matrix.append([])
+            for j in range(c):
+                matrix[i].append(mat[(i * c + j) // col][(i * c + j) % col])#列 行
+
+        return matrix
