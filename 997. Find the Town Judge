@@ -1,0 +1,10 @@
+class Solution:
+    def findJudge(self, n: int, trust: List[List[int]]) -> int:
+        find = [0]*(n+1)
+        for x,y in trust:
+            find[x]-=1#相信別人，他不是法官
+            find[y]+=1
+        for i in range(1,n+1):
+            if find[i] == n-1:#若有n-1人相信此人，此人即為法官
+                return i
+        return -1
