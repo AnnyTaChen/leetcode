@@ -1,0 +1,13 @@
+class Solution:
+    def addDigits(self, num: int) -> int:
+        return self.add(num)
+
+    def add(self, num):
+        x = 0
+        while num != 0:
+            x = x + num % 10
+            num = num // 10
+        if x >= 10:
+            return self.add(x)
+        else:
+            return x
