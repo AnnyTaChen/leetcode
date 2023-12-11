@@ -1,0 +1,12 @@
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        d={}
+        for index,value in enumerate(nums):
+            if value not in d:
+                d[value]=index
+            else:
+                if abs(d.get(value)-index)<= k:#找到value的index值
+                    return True
+                else:
+                    d[value]=index
+        return False
