@@ -1,0 +1,23 @@
+from typing import List
+
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        if image[sr][sc] == newColor:
+            return image
+
+        n = len(image)
+        m = len(image[0])
+        oldColor = image[sr][sc]
+        
+        self.help(image, n, m, sr, sc, oldColor, newColor)
+        return image
+
+    def help(self, image, n, m, i, j, oldColor, newColor):
+        if i < 0 or i >= n or j < 0 or j >= m or image[i][j] != oldColor:#只改顏色相同的
+            return
+
+        image[i][j] = newColor
+        self.help(image, n, m, i + 1, j, oldColor, newColor)#確認周圍顏色
+        self.help(image, n, m, i - 1, j, oldColor, newColor)
+        self.help(image, n, m, i, j + 1, oldColor, newColor)
+        self.help(image, n, m, i, j - 1, oldColor, newColor)
