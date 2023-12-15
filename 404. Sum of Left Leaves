@@ -1,0 +1,27 @@
+# from typing import Optional
+
+# # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        return self.helper(root)
+
+    def helper(self, root):
+        sum1 = 0
+        if root is None:
+            return 0
+
+        # 檢查左子節點是否為葉節點
+        if root.left and root.left.left is None and root.left.right is None:
+            sum1 += root.left.val
+
+        # 遞迴呼叫 helper 方法處理左右子樹，並將結果加到總和
+        sum1 += self.helper(root.left)
+        sum1 += self.helper(root.right)
+
+        return sum1
