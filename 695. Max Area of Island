@@ -1,0 +1,30 @@
+from typing import List
+
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        if not grid or not grid[0]:
+            return 0
+
+        self.n, self.m = len(grid), len(grid[0])
+        max_area = 0
+
+        for i in range(self.n):
+            for j in range(self.m):
+                if grid[i][j] == 1:
+                    max_area = max(max_area, self.dfs(i, j, grid))
+
+        return max_area
+
+    def dfs(self, i, j, grid):
+        if i < 0 or i >= self.n or j < 0 or j >= self.m or grid[i][j] == 0:
+            return 0
+
+        grid[i][j] = 0
+        area = 1  
+
+        area += self.dfs(i + 1, j, grid)
+        area += self.dfs(i - 1, j, grid)
+        area += self.dfs(i, j + 1, grid)
+        area += self.dfs(i, j - 1, grid)
+
+        return area
