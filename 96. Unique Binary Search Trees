@@ -1,8 +1,21 @@
 class Solution:
     def numTrees(self, n: int) -> int:
-        if n <= 1:
-            return 1
-        res = 0
+        #BST:root.left要<root,root.right要>root
+        #root(n)=root(1)+root(2)+....+root(n),ex.n=5
+        #root(1).right是root(2),root(3),root(4),root(5)組合以此類推
+        #root(2).left是root(1) right以上類推
+        ans={
+            0:1,
+            1:1,
+            2:2
+        }
+        return self.dfs(n,ans)
+    def dfs(self,n,ans):
+        if n in ans:
+            return ans[n]
+        
+        result = 0
         for i in range(n):
-            res += self.numTrees(i)*self.numTrees(n-i-1)
-        return res
+            result +=self.dfs(i,ans) *self.dfs(n-i-1,ans)
+        ans[n]=result#降低計算
+        return result
