@@ -1,0 +1,9 @@
+SELECT 
+    CASE
+        WHEN s.id % 2 <> 0 AND s.id <> (SELECT COUNT(id) FROM Seat) THEN s.id + 1
+        WHEN s.id % 2 = 0 THEN s.id - 1
+        ELSE s.id
+    END AS id,
+    student
+FROM Seat s
+ORDER BY id;
