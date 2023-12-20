@@ -1,0 +1,30 @@
+class Solution:
+    def findSecondMinimumValue(self, root: Optional[TreeNode]) -> int:
+        if root is None:
+            return -1
+
+        current = [root]
+
+        # Use a set to store unique values
+        unique_vals = set()
+
+        while current:
+            next_current = []
+            for node in current:
+                unique_vals.add(node.val)
+
+                if node.left:
+                    next_current.append(node.left)
+
+                if node.right:
+                    next_current.append(node.right)
+
+            current = next_current
+
+        # If there is only one unique value, no second minimum exists
+        if len(unique_vals) == 1:
+            return -1
+
+        # Sort the unique values and return the second minimum
+        sorted_vals = sorted(unique_vals)
+        return sorted_vals[1]
