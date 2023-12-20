@@ -1,0 +1,24 @@
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+
+        result = []
+        current = [root]
+
+        while current:
+            next_current = []
+            vals = []
+
+            for node in current:
+                vals.append(node.val)
+
+                if node.left:
+                    next_current.append(node.left)
+                if node.right:
+                    next_current.append(node.right)
+
+            result.append(vals)
+            current = next_current
+
+        return result
