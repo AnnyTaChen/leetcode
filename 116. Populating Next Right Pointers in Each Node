@@ -1,0 +1,26 @@
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if root is None:
+            return None
+
+        current = [root]
+
+        while current:
+            next_current = []
+            prev_node = None
+
+            for node in current:
+                if prev_node:
+                    prev_node.next = node
+
+                if node.left:
+                    next_current.append(node.left)
+
+                if node.right:
+                    next_current.append(node.right)
+
+                prev_node = node
+
+            current = next_current
+
+        return root
