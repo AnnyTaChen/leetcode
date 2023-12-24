@@ -1,0 +1,22 @@
+class Solution:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+        level = 1
+        res = []
+        current = [root]
+        next_current = []
+        while current:
+            for node in current:
+                if node.left:
+                    next_current.append(node.left)
+                if node.right:
+                    next_current.append(node.right)
+            if level % 2 == 0:
+                current.reverse()
+            res.append([node.val for node in current])
+            current = next_current
+            if next_current:
+                level += 1
+            next_current = []
+        return res
