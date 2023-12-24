@@ -1,0 +1,22 @@
+from typing import List
+from collections import Counter
+
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        if k < 0:
+            return 0  # k不能为负数
+
+        ct = Counter(nums)
+        result = 0
+
+        for i in ct:
+            if k == 0:
+                # 对于 k == 0 的情况，查找元素出现次数大于等于2的
+                if ct[i] >= 2:
+                    result += 1
+            else: 
+                # 对于 k != 0 的情况，查找是否存在 i + k
+                if i + k in ct:
+                    result += 1
+
+        return result
