@@ -1,0 +1,19 @@
+class Solution:
+    def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+        n = len(mat)
+        m = len(mat[0])
+        strength = []  # 保存每行的士兵数量
+        list1 = []
+
+        for i in range(n):
+            count = sum(mat[i])  # 计算当前行的士兵数量
+            strength.append([count, i])  # 保存士兵数量和行号的元组
+
+        # 根据士兵数量进行排序
+        strength.sort(key=lambda x: x[0])
+
+        # 取出前 k 个最弱的行号
+        for i in range(k):
+            list1.append(strength[i][1])
+
+        return list1
