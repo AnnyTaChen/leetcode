@@ -1,0 +1,14 @@
+class Solution:
+    def findTheDistanceValue(self, arr1: List[int], arr2: List[int], d: int) -> int:
+        n = len(arr1)
+        m = len(arr2)
+        TF = 0
+        sum1 = 0
+        for i in range(n):
+            count = 0
+            for j in range(m):
+                if abs(arr1[i]-arr2[j]) <= d:
+                    count = 1
+            TF += count
+        sum1 = n - TF
+        return sum1
