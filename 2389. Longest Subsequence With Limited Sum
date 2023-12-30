@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
+        nums.sort()
+        list1 = []
+
+        for i in range(len(queries)):
+            sum1 = 0
+            for j in range(len(nums)):
+                if sum1 + nums[j] <= queries[i]:
+                    sum1 += nums[j]
+                else:
+                    list1.append(j)
+                    break
+            else:
+                list1.append(len(nums))
+
+        return list1
