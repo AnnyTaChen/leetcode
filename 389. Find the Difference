@@ -1,0 +1,9 @@
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        # 轉ASCII code相減得到增加數字的ASCII code
+        sum1 = 0
+        for i in range(len(s)):
+            sum1 += ord(s[i])
+        for j in range(len(t)):
+            sum1 -= ord(t[j])
+        return chr(abs(sum1))
